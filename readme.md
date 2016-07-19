@@ -10,7 +10,7 @@ Laravel is a web application framework with expressive, elegant syntax. We belie
 
 ##Instructions
 1. Do `git clone https://github.com/thesubhendu/larajob.git ` 
-2. CD into directory where you cloned it and do `composer update`
+2. CD into directory where you cloned it and do `composer install`
 
 ## Official Documentation
 
