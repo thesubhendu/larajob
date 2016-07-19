@@ -2,6 +2,11 @@
 @section('content')
 <h2>Welcome to wrs jobs</h2>
 <div class="container">
+@if(Session::has('message'))
+    <div class="alert alert-info">
+        <p>{{ Session::get('message') }}</p>
+    </div>
+@endif
 	<div class="row">
 		<table class="table table-bordered">
     <thead >

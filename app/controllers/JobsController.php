@@ -10,7 +10,7 @@ class JobsController extends \BaseController {
 	public function index()
 	{
 		//
-		$jobs=Job::all();
+		$jobs=Job::where('active',1)->get();
 		return View::make('index')->with('jobs',$jobs);
 	}
 
@@ -42,13 +42,11 @@ class JobsController extends \BaseController {
 		
 		Job::create($data);
 		//mail send
-		Mail::send('confirmemail', array('emailer'=>Input::get('email')), function($message){
-        $message->to(Input::get('email'))->subject('Welcome to the Laravel 4 Auth App!');
+		Mail::send('confirmemail', array('emailer'=>Input::get('email'),'ccode'=>$ccode), function($message){
+        $message->to(Input::get('email'))->subject('Welcome to WRS Job!');
     });
-
-		// Flash::message('Thanks for signing up! Please check your email.');
-
-		return Redirect::route('jobs.index');
+		
+		return Redirect::route('jobs.index')->with('message',"Thanks for Posting Job. Please check email to proceed");
 	}
 
 
@@ -61,6 +59,7 @@ class JobsController extends \BaseController {
 	public function show($id)
 	{
 		//
+
 	}
 
 
@@ -99,5 +98,20 @@ class JobsController extends \BaseController {
 		//
 	}
 
+	public function confirm($ccode){
+			$jobs=Job::where('ccode',$ccode)->first();
+
+		if($ccode==$jobs->ccode){
+			$jobs->active=1;
+			$jobs->ccode=null;
+			$jobs->save();
+			return Redirect::route('jobs.index');
+		}else{
+			return "Something went wrong";
+		}
+
+	}
+
+	
 
 }

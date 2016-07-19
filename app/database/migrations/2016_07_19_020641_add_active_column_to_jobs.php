@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCcodeColumn extends Migration {
+class AddActiveColumnToJobs extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -15,7 +15,7 @@ class CreateCcodeColumn extends Migration {
 		Schema::table('jobs', function(Blueprint $table)
 		{
 			//
-			 $table->string('ccode');
+			$table->tinyInteger('active')->default(0);
 		});
 	}
 
@@ -29,7 +29,7 @@ class CreateCcodeColumn extends Migration {
 		Schema::table('jobs', function(Blueprint $table)
 		{
 			//
-			$table->dropColumn('ccode');
+			$table->dropColumn('active');
 		});
 	}
 

@@ -15,5 +15,9 @@ Route::get('/', function()
 {
 	return View::make('hello');
 });
-
+ Route::get('verify/{ccode}',['as'=>'verifyit','uses'=>'JobsController@confirm']);
 Route::resource('jobs','JobsController');
+// Route::get('verify/{emailer}/{ccode}',function($uid,$ccode){
+// 	return "Hellow".$ccode;
+// });
+
