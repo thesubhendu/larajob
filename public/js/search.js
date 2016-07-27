@@ -18,6 +18,7 @@ $(document).ready(function(){
 
 	$('#keyword').keyup(up);
 	$('#keyword').keydown(down);
+	// $('#keyword').submit(up);
 
 
 	

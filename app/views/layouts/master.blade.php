@@ -38,9 +38,9 @@ input[type=text]:focus {
       <li><a href="{{route('jobs.create')}}">Create Job</a></li>
     
        {{-- <form action="{{url('/search')}}"><input type="text" name="search" placeholder="Search.."></form> --}}
-       {{ Form::open(array('url' => '/search')) }}
-        {{Form::text(null,null,['id'=>'keyword'])}}
-        {{ Form::close() }}
+       <input type="text" id="keyword">
+        
+       
         <div id="result_box"></div>
     </ul>
   </div>
