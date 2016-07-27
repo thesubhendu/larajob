@@ -72,6 +72,8 @@ class JobsController extends \BaseController {
 	public function edit($id)
 	{
 		//
+		$job=Job::find($id);
+		return View::make('editjob')->with('job',$job);
 	}
 
 
@@ -96,6 +98,9 @@ class JobsController extends \BaseController {
 	public function destroy($id)
 	{
 		//
+		$job=Job::find($id);
+		$job->delete();
+		return Redirect::route('jobs.index')->with('deleted','Job Deleted Successfully');
 	}
 
 	public function confirm($ccode){
@@ -109,6 +114,18 @@ class JobsController extends \BaseController {
 		}else{
 			return "Something went wrong";
 		}
+
+	}
+
+	public function postSearch(){
+		$keyword=Input::get('search');
+		$results=Job::where('title','LIKE','%'.$keyword.'%')->get();
+
+		return View::make('sr',compact('results'));
+
+
+
+
 
 	}
 

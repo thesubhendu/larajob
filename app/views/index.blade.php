@@ -7,6 +7,11 @@
         <p>{{ Session::get('message') }}</p>
     </div>
 @endif
+    @if(Session::has('deleted'))
+    <div class="alert alert-success">
+        <p>{{ Session::get('deleted') }}</p>
+    </div>
+    @endif
 	<div class="row">
 		<table class="table table-bordered">
     <thead >
@@ -21,21 +26,32 @@
       </tr>
     </thead>
     <tbody>
-      @foreach($jobs as $j)
+      @foreach($jobs as $job)
       <tr>
-      <td>{{$j->id}}</td>
-      <td>{{$j->email}}</td>
-      <td>{{$j->title}}</td>
-      <td>{{$j->details}}</td>
-      <td>{{$j->skills}}</td>
-      <td>{{$j->ccode}}</td>
-      <td></td>
+      <td>{{$job->id}}</td>
+      <td>{{$job->email}}</td>
+      <td>{{$job->title}}</td>
+      <td>{{$job->details}}</td>
+      <td>{{$job->skills}}</td>
+      <td>{{$job->ccode}}</td>
+      <td>
+
+          {{--<a href="{{route('jobs.destroy',$job->id)}}">Delete</a>--}}
+          <a href="{{route('jobs.edit',$job->id)}}" class="btn btn-info ">Edit Job</a>
+          <!-- delete button -->
+          {{ Form::open(array('route' => ['jobs.destroy',$job->id])) }}
+          {{ Form::hidden('_method', 'DELETE') }}
+          {{ Form::submit('Delete Job', array('class' => 'btn btn-warning')) }}
+          {{ Form::close() }}
+      </td>
       
        
       </tr>
         @endforeach
     </tbody>
   </table>
+
+  
 	</div>
 </div>
 
