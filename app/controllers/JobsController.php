@@ -118,12 +118,21 @@ class JobsController extends \BaseController {
 	}
 
 	public function postSearch(){
-		$keyword=Input::get('search');
-		$results=Job::where('title','LIKE','%'.$keyword.'%')->get();
+		$keyword=Input::get('keyword');
+		// $keyword="omg";
+		$jobs=Job::all();
 
-		return View::make('sr',compact('results'));
+		$searchedJobs= new \Illuminate\Database\Eloquent\Collection();
+		foreach ($jobs as $job) {
+			if(str_contains(strtolower($job->title),strtolower($keyword))){
+				$searchedJobs->add($job);
+			}
+		}
 
+		return View::make('sr',compact('searchedJobs'));
 
+// return "hey";
+// return $keyword;
 
 
 
